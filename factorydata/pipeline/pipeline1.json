@@ -60,7 +60,7 @@
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "blonName",
+								"variableName": "blobName",
 								"value": "@{item().BlobName}"
 							}
 						},
@@ -118,7 +118,7 @@
 			"blobPath": {
 				"type": "String"
 			},
-			"blonName": {
+			"blobName": {
 				"type": "String"
 			},
 			"container": {
