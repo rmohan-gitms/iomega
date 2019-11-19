@@ -25,8 +25,83 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "blobmsglookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('blobmsglookup').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Set blob path",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "blobPath",
+								"value": "@{item().Path}"
+							}
+						},
+						{
+							"name": "Set blob name",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "blonName",
+								"value": "@{item().BlobName}"
+							}
+						},
+						{
+							"name": "Set container",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set blob name",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "Set blob path",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "container",
+								"value": "@substring(item().Path, 0, indexof(item().Path, item().BlobName))"
+							}
+						}
+					]
+				}
 			}
 		],
+		"variables": {
+			"blobPath": {
+				"type": "String"
+			},
+			"blonName": {
+				"type": "String"
+			},
+			"container": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
