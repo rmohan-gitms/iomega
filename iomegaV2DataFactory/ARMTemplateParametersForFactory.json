@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "iomegaV2DataFactory"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://iomegakeyvault2.vault.azure.net/"
 		}
